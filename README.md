@@ -2,23 +2,47 @@
 
 ---------- ANOTAÇÕES 04/08/2025
 
-ABSTRÇÃO
-Abstração é representar elementos reais no software.
+Abstração
+Abstração é o ato de representar elementos do mundo real no software, focando apenas nos detalhes essenciais para o funcionamento do sistema.
 
-OCULTAMENTO DE INFORMAÇÃO
-No ocultamento de informação, getters e setters são métodos que permitem a leitura (getters) e modificação (setters) dos dados sem alterar diretamente a variável.
+Ocultamento de Informação
+Consiste em proteger os atributos internos de uma classe, permitindo seu acesso e modificação apenas por meio de métodos públicos:
+Getters: para leitura dos dados.
+Setters: para alteração dos dados.
+Isso evita a manipulação direta das variáveis e mantém a integridade dos dados.
 
-CODIGO COESO
-Coóigo que tem coesao é um codigo que faz uma coisa bem feita
+Código Coeso
+Um código coeso é aquele que executa uma única tarefa de forma clara e eficiente. Quanto maior a coesão, mais simples é entender, manter e evoluir a classe.
 
-ACOPLAMENTO
-Acoplamento é a força da conexão entre 2 classes. Existem dois tipos de acoplamento, sendo eles acoplamento aceitável e acoplamento ruim.
-Herança é uma flexa vazada - ex  gato e cachorro sao 2 heranças de animal
-implementação é a flexa vazada pontilhada 
-associação é a flexa preenchida
+Acoplamento
+É o grau de dependência entre duas classes.
+Acoplamento aceitável: classes se relacionam de forma controlada.
+Acoplamento ruim: mudanças em uma classe afetam diretamente outras.
 
-AUTOACOPLAMENTO
-Quando mexemos em uma pedaço do código e impcta nos outros. Não tem ocmo evitar 100%.
+Relacionamentos em UML:
+Herança: seta vazada (ex: Gato e Cachorro herdam de Animal).
+Implementação: seta vazada e pontilhada (implementação de interfaces).
+Associação: seta preenchida (indica ligação direta entre objetos).
 
-AUTOWIRED
-injeção de independencia.
+Autoacoplamento
+Ocorre quando a alteração em uma parte do código impacta outras internamente. É natural em sistemas complexos, mas deve ser minimizado com boas práticas.
+
+@Autowired
+Anotação do Spring Framework usada para realizar injeção de dependência, ou seja, o próprio framework instancia e fornece os objetos que uma classe precisa, sem a necessidade de criá-los manualmente.
+
+---------- ANOTAÇÕES 05/08/2025
+SOLID
+Conjunto de cinco princípios para um código orientado a objetos mais limpo, flexível e de fácil manutenção. Criado por Robert C. Martin, um dos principas nomes da engenharia de software:
+
+S – Responsabilidade Única - Single Responsibility Principle:
+Uma classe deve ter apenas um motivo para mudar, ou seja, deve ter uma única responsabilidade.
+
+I – Segregação de Interfaces - Interface Segregation Principle:
+Nenhuma classe deve ser forçada a implementar métodos que não utiliza. Prefira interfaces específicas em vez de genéricas.
+
+
+MVC (Model-View-Controller)
+Padrão de arquitetura que separa a aplicação em três camadas:
+- Model: Dados e regras de negócio.
+- View: Interface com o usuário (HTML, por exemplo).
+- Controller: Intermedia a comunicação entre Model e View, controlando a lógica da aplicação.
