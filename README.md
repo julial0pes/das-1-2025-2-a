@@ -31,6 +31,7 @@ Ocorre quando a alteração em uma parte do código impacta outras internamente.
 Anotação do Spring Framework usada para realizar injeção de dependência, ou seja, o próprio framework instancia e fornece os objetos que uma classe precisa, sem a necessidade de criá-los manualmente.
 
 ---------- ANOTAÇÕES 05/08/2025
+
 SOLID
 Conjunto de cinco princípios para um código orientado a objetos mais limpo, flexível e de fácil manutenção. Criado por Robert C. Martin, um dos principas nomes da engenharia de software:
 
