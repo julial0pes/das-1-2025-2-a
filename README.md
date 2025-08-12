@@ -74,3 +74,11 @@ Uma classe deve estar fechada para modificações e aberta para exenções.
 
 classe abstrata 
 classe abstrata é uma classe meio pronta
+
+----------- 12/08/2025
+principio de liskov
+O Princípio de Liskov é aplicado em contextos onde há herança entre classes. Ele define uma regra importante para a redefinição de métodos de uma classe base (superclasse) em suas classes filhas (subclasses).
+
+A ideia central é:
+"Se uma classe filha herda de uma classe base, ela deve ser capaz de substituí-la em qualquer lugar do código sem quebrar o comportamento esperado."
+Ou seja, o código deve funcionar normalmente se você usar uma instância da classe filha no lugar da classe pai, sem causar erros, comportamentos inesperados ou violações de regras da classe base.
