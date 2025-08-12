@@ -47,3 +47,30 @@ Padrão de arquitetura que separa a aplicação em três camadas:
 - Model: Dados e regras de negócio.
 - View: Interface com o usuário (HTML, por exemplo).
 - Controller: Intermedia a comunicação entre Model e View, controlando a lógica da aplicação.
+
+
+------------- ANOTAÇÕES 11/08/2025
+
+Princípio da Inversão de Dependência
+Esse princípio recomenda que uma classe cliente crie dependências preferencialmente com abstrações, e não com implementações concretas. Isso porque as abstrações são mais adaptáveis e flexíveis, enquanto as implementações concretas tendem a limitar as mudanças e dificultar a manutenção no futuro.
+
+Prefira composição a herança
+Herança de classes: exemplo class A extends B, envolve reuso de código, mas cria acoplamento entre as classes.
+Herança de interfaces: exemplo interface I extends J, não envolve reuso de código, apenas a obrigação de implementar os métodos definidos.
+
+ou seja, usamos com composição do que herança 
+
+
+Princípio de Demeter
+Defende que a implementação de um método deve invocar apenas métodos de:
+
+-A própria classe onde o método está.
+-Objetos recebidos como parâmetro.
+-Objetos criados dentro do próprio método.
+-Atributos da classe onde o método está.
+
+Principio do aberto fechado
+Uma classe deve estar fechada para modificações e aberta para exenções.
+
+classe abstrata 
+classe abstrata é uma classe meio pronta
