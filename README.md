@@ -141,3 +141,41 @@ Operação DevOps
 DevOps é uma maneira de entregar valor para o cliente mais rapidamente, entregando funcionalidades com mais agilidade. A contratação de Dev e Ops refere-se à substituição das operações e desenvolvimento em silos, ou seja, todos são responsáveis pelo sistema e participam da criação e manutenção de todas as partes do projeto.
 Se o sistema cair, todos recebem a notificação e trabalham juntos para colocá-lo no ar novamente. É difícil encontrar profissionais DevOps, por isso normalmente são criadas equipes específicas de DevOps.
 
+----------- 02/09
+
+Nível de Abstração
+
+Arquiteto de Software pensa em alto nível, estrutura do sistema, tecnologias envolvidas, decisões de arquitetura, trade-offs técnicos e requisitos não funcionais (como desempenho, escalabilidade, segurança, etc.).
+Designer/Desenvolvedor lida com a implementação prática, criação de código, design de classes, interfaces de usuário, testes e entrega de funcionalidades específicas.
+
+Responsabilidades
+
+Arquiteto:
+Traduz requisitos de negócio em atributos arquiteturais.
+Escolhe padrões, estilos arquiteturais e tecnologias.
+Cria componentes (blocos estruturais do sistema).
+Avalia e gerencia trade-offs técnicos e comerciais.
+Atua como mentor e facilitador técnico para os desenvolvedores.
+
+Designer/Desenvolvedor:
+Implementa os componentes definidos pelo arquiteto.
+Cria diagrama de classes, interfaces, e o código-fonte.
+Testa e garante que o software funcione como esperado.
+
+Tipo de Conhecimento
+
+Arquiteto:
+Prioriza amplitude técnica: conhece uma grande variedade de tecnologias, mesmo que não profundamente.
+Precisa saber o que existe, o que é possível, e o que considerar como solução.
+
+Desenvolvedor:
+Prioriza profundidade técnica: é especialista em poucas tecnologias e sabe aplicá-las com maestria no dia a dia.
+
+Forma de Pensar (Pensamento Arquitetônico)
+
+O arquiteto enxerga o sistema como um todo, conectando requisitos de negócio com decisões técnicas.
+Já o desenvolvedor foca mais no nível da implementação concreta das decisões arquiteturais.
+
+ou seja
+O arquiteto pensa no sistema como um todo, com foco em decisões técnicas que impactam todo o projeto, equilibrando vários fatores, como tecnologia, negócio e restrições. Ele tem uma visão ampla e trabalha com muitos conhecimentos diferentes, mesmo que não seja especialista em todos.
+O designer/desenvolvedor foca na implementação prática, construindo as partes específicas do sistema, detalhando o design das funcionalidades e escrevendo o código. Ele precisa ser especialista em algumas tecnologias para entregar um trabalho de qualidade.
