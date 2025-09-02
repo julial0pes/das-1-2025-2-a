@@ -77,8 +77,67 @@ classe abstrata é uma classe meio pronta
 
 ----------- 12/08/2025
 principio de liskov
-O Princípio de Liskov é aplicado em contextos onde há herança entre classes. Ele define uma regra importante para a redefinição de métodos de uma classe base (superclasse) em suas classes filhas (subclasses).
-
+O Princípio de Liskov é aplicado em contextos onde há herança entre classes. Ele define uma regra importante para a redefinição de métodos de uma classe base (superclasse) em suas 
+classes filhas (subclasses).
 A ideia central é:
 "Se uma classe filha herda de uma classe base, ela deve ser capaz de substituí-la em qualquer lugar do código sem quebrar o comportamento esperado."
 Ou seja, o código deve funcionar normalmente se você usar uma instância da classe filha no lugar da classe pai, sem causar erros, comportamentos inesperados ou violações de regras da classe base.
+
+-----------01/09/2025
+
+Características arquiteturais = requisitos não funcionais
+
+É impossível que um sistema atenda 100% a todos os itens da arquitetura estrutural, que incluem:
+
+disponibilidade
+confiabilidade
+integridade
+escalabilidade
+segurança
+agilidade
+tolerância a falhas
+elasticidade
+recuperabilidade
+desempenho
+implementabilidade
+capacidade de aprendizado
+
+Sempre precisamos abrir mão de algum aspecto; essa escolha representa uma característica arquitetural.
+
+Decidimos por uma arquitetura que melhor atenda às características prioritárias para o sistema.
+
+A decisão arquitetural é escolher como o sistema será organizado, ou seja, qual arquitetura será utilizada.
+
+
+O que um arquiteto faz?
+
+Toma decisões arquiteturais
+-Deve ser uma pessoa que orienta a equipe, dando um norte sobre o que fazer, como fazer e por que fazer. Às vezes, ele toma uma decisão específica para preservar uma característica da arquitetura, como escalabilidade, desempenho ou disponibilidade.
+
+Analisa continuamente a arquitetura
+-Pode decidir reconstruir determinada parte do sistema, sempre mantendo a vitalidade da arquitetura.
+
+Mantém a arquitetura atualizada com as últimas tendências
+-Um arquiteto deve se atualizar constantemente com as últimas tendências técnicas do setor. As decisões arquiteturais tendem a ser de longo prazo e difíceis de mudar.
+
+Assegura a conformidade com as decisões
+-Verifica continuamente se as equipes de desenvolvimento seguem as decisões da arquitetura, assim como os princípios de design definidos, documentados e comunicados por ele.
+
+Possui exposição e experiências diversificadas
+-Deve ter passado por diversas experiências e se expor a tecnologias variadas.
+
+Tem conhecimento sobre o domínio do negócio
+-Deve ter certo nível de especialização no domínio do negócio para poder se comunicar de forma eficiente com o Product Owner (PO).
+
+Possui habilidades interpessoais
+-Precisa saber lidar com pessoas, sendo capaz de motivar, inspirar e liderar.
+
+Entende e lida bem com questões políticas
+-Deve compreender que existe uma estrutura hierárquica e, às vezes, negociar prazos com equipes e clientes para lidar bem com o clima político da empresa.
+
+
+Operação DevOps
+
+DevOps é uma maneira de entregar valor para o cliente mais rapidamente, entregando funcionalidades com mais agilidade. A contratação de Dev e Ops refere-se à substituição das operações e desenvolvimento em silos, ou seja, todos são responsáveis pelo sistema e participam da criação e manutenção de todas as partes do projeto.
+Se o sistema cair, todos recebem a notificação e trabalham juntos para colocá-lo no ar novamente. É difícil encontrar profissionais DevOps, por isso normalmente são criadas equipes específicas de DevOps.
+
