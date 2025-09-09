@@ -179,3 +179,51 @@ Já o desenvolvedor foca mais no nível da implementação concreta das decisõe
 ou seja
 O arquiteto pensa no sistema como um todo, com foco em decisões técnicas que impactam todo o projeto, equilibrando vários fatores, como tecnologia, negócio e restrições. Ele tem uma visão ampla e trabalha com muitos conhecimentos diferentes, mesmo que não seja especialista em todos.
 O designer/desenvolvedor foca na implementação prática, construindo as partes específicas do sistema, detalhando o design das funcionalidades e escrevendo o código. Ele precisa ser especialista em algumas tecnologias para entregar um trabalho de qualidade.
+
+
+-------------- 08/09
+Trade-offs em Arquitetura
+
+Toda vez que definimos uma arquitetura, não é possível atender a todos os requisitos ao mesmo tempo.
+Não existem respostas certas ou erradas, existem trade-offs — escolhas que privilegiam alguns pontos em detrimento de outros.
+
+Por exemplo, uma arquitetura funciona bem para um sistema de leilão, onde só há um produto sendo negociado por vez.
+Mas se aplicarmos essa arquitetura em um marketplace como o Mercado Livre, não vai funcionar: uma única instância de banco de dados respondendo a milhões de requisições por segundo não escala.
+
+Qual seria uma arquitetura mais escalável?
+1. Arquitetura baseada em tópicos (Publish/Subscribe)
+Um mecanismo de tópicos funciona como um grupo da família no WhatsApp.
+Por uma questão de convivência familiar, todos estão no grupo.
+E aí, naquela situação clássica, a tia manda uma mensagem de “bom dia” no domingo, às 4 da manhã, que é automaticamente encaminhada para todos sem filtro.
+Isso é um mecanismo de tópicos.
+
+Características:
+Modelo 1 para muitos: o publisher publica uma única cópia da mensagem, e todos recebem essa mesma cópia.
+Baixo acoplamento entre quem envia e quem recebe.
+
+Semelhança com o padrão Observer:
+Assim como no Observer, onde um objeto notifica automaticamente seus observadores quando há uma mudança, o sistema de tópicos notifica todos os assinantes de forma assíncrona, usando protocolos específicos para garantir entrega e desacoplamento.
+
+2. Arquitetura baseada em filas
+A fila trabalha com duas operações clássicas: enqueue (colocar na fila) e dequeue (retirar da fila).
+Aqui, o modelo é 1 para 1: existe um sender (quem envia) e um receiver (quem recebe).
+
+Características:
+Garante a entrega das mensagens na ordem exata em que chegaram — se chegarem vermelho, azul e verde, serão entregues nessa mesma ordem.
+Serve como um buffer, armazenando a mensagem até ser consumida.
+Diferente do tópico, onde mensagens podem ser perdidas se o receptor estiver fora do ar, na fila é obrigatório salvar a mensagem até a entrega.
+No leilão, quem dá o lance publica uma mensagem em uma fila específica, diferente do grupo da família, onde a mensagem vai para todos os membros.
+
+Extensibilidade arquitetural
+Extensibilidade é a capacidade de um sistema ser facilmente modificado, adaptado e expandido com novas funcionalidades, sem precisar reescrever seu código base.
+A fila tem uma resiliência maior que o tópico, por garantir a entrega da mensagem.
+A fila oferece melhor observabilidade que o tópico, pois mantém o histórico e a ordem das mensagens.
+A fila requer uma mudança significativa para incluir novos consumidores, enquanto a abordagem de tópicos não exige mudanças para isso.
+
+No modelo de tópicos, quem envia a mensagem não sabe como ela será usada, e quem consome só sabe que vai receber.
+No modelo de fila, sabe-se exatamente quais informações serão usadas e em que ordem.
+
+Consideração final
+Os programadores geralmente conhecem bem os benefícios de cada abordagem, mas muitas vezes não entendem os trade-offs envolvidos.
+Os arquitetos, por outro lado, precisam compreender profundamente ambos: os benefícios e os trade-offs para tomar decisões acertadas.
+
