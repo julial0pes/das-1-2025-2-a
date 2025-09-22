@@ -62,7 +62,7 @@ Model: Dados e regras de negócio.
 View: Interface com o usuário (ex.: HTML).
 
 Controller: Intermedia a comunicação entre Model e View, controlando a lógica da aplicação.
-
+```
 Swing - Janela em Java
 package br.univille;
 
@@ -103,6 +103,7 @@ public class Janelinha extends JFrame {
         new Janelinha();
     }
 }
+```
 
 ### Princípio da Inversão de Dependência
 
@@ -176,14 +177,32 @@ Estruturais: tratam da composição de classes e objetos. Ex.: Proxy, Adapter, F
 Comportamentais: lidam com interação e divisão de responsabilidades. Ex.: Strategy, Observer, Template Method, Visitor, Chain of Responsibility, Command, Interpreter, Iterator, Mediator, Memento, State.
 
 ### Factory Method
+Suponha um sistema distribuído baseado em TCP/IP. Três funções (f, g, h) criam objetos TCPChannel para comunicação:
+```
+void f() {
+  TCPChannel c = new TCPChannel();
+  ...
+}
 
-Exemplo: sistema distribuído com objetos TCPChannel criados em três funções (f, g, h).
-Problema: mudar para UDP quebra o Princípio Aberto/Fechado, pois o código precisa ser modificado em vários pontos.
+void g() {
+  TCPChannel c = new TCPChannel();
+  ...
+}
 
-Solução: centralizar a criação dos objetos em um método fábrica estático:
+void h() {
+  TCPChannel c = new TCPChannel();
+  ...
+}
+```
+Problema
+Se for necessário usar UDP, o sistema quebra o Princípio Aberto/Fechado.
+O código não está preparado para extensões sem modificações.
 
+Solução
+Criar um método fábrica estático que centralize a criação dos objetos:
+```
 class ChannelFactory {
-  public static Channel create() {
+  public static Channel create() { // método fábrica estático
     return new TCPChannel();
   }
 }
@@ -193,15 +212,56 @@ void f() {
   ...
 }
 
+void g() {
+  Channel c = ChannelFactory.create();
+  ...
+}
 
-Se mudar para UDP, altera-se apenas o método create() na fábrica.
+void h() {
+  Channel c = ChannelFactory.create();
+  ...
+}
+```
+Agora, se o canal mudar para UDP, apenas o método create da ChannelFactory precisa ser alterado.
 
-### Fábrica Abstrata:
-Define vários métodos fábrica por meio de uma classe abstrata.
+### Fábrica Abstrata
+Uma variação utiliza uma classe abstrata para definir vários métodos fábrica:
+```
+abstract class ProtocolFactory { // Fábrica Abstrata
+  abstract Channel createChannel();
+  abstract Port createPort();
+  ...
+}
 
-Singleton
-Evita múltiplas instâncias de uma classe (ex.: Logger).
+void f(ProtocolFactory pf) {
+  Channel c = pf.createChannel();
+  Port p = pf.createPort();
+  ...
+}
+```
+### Singleton
+Suponha uma classe Logger usada para registrar operações do sistema:
+```
+void f() {
+  Logger log = new Logger();
+  log.println("Executando f");
+}
 
+void g() {
+  Logger log = new Logger();
+  log.println("Executando g");
+}
+
+void h() {
+  Logger log = new Logger();
+  log.println("Executando h");
+}
+```
+O problema é que criamos múltiplas instâncias do Logger, o que não é eficiente nem desejável.
+
+Solução
+Aplicar o padrão Singleton, garantindo que a classe possua apenas uma única instância global:
+```
 public class Logger {
     private static Logger instance;
 
@@ -218,62 +278,10 @@ public class Logger {
         System.out.println(msg);
     }
 }
-
-
-Uso:
-
+```
+Uso
 Logger log = Logger.getInstance();
 log.println("Executando f");
-
-### Observer
-
-Define uma relação de dependência um-para-muitos entre objetos, notificando automaticamente todos os interessados quando um objeto muda de estado.
-
-Exemplo em Java:
-
-public interface Observer {
-    void update(String message);
-}
-
-public class Publisher {
-    private List<Observer> observers = new ArrayList<>();
-
-    public void addObserver(Observer o) {
-        observers.add(o);
-    }
-
-    public void notifyObservers(String message) {
-        for (Observer o : observers) {
-            o.update(message);
-        }
-    }
-}
-
-public class Subscriber implements Observer {
-    private String name;
-
-    public Subscriber(String name) {
-        this.name = name;
-    }
-
-    public void update(String message) {
-        System.out.println(name + " recebeu: " + message);
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        Publisher publisher = new Publisher();
-
-        Subscriber s1 = new Subscriber("Alice");
-        Subscriber s2 = new Subscriber("Bob");
-
-        publisher.addObserver(s1);
-        publisher.addObserver(s2);
-
-        publisher.notifyObservers("Novo artigo publicado!");
-    }
-}
 
 ### Operação DevOps
 
@@ -330,3 +338,4 @@ Extensibilidade arquitetural
 
 Filas garantem entrega e mantém histórico, porém exigem mudanças para novos consumidores.
 Tópicos permitem adicionar consumidores sem alteração no emissor.
+
