@@ -1,7 +1,23 @@
 # DAS-1-2025-3-A 
 
-### Abstração
-Abstração é o processo de representar elementos do mundo real dentro do software, focando apenas nos detalhes essenciais para o funcionamento do sistema.
+### Princípios Fundamentais de Projeto de Software
+
+**Padronização:** Adotar um padrão de escrita de código para controlar a complexidade e facilitar o entendimento por toda a equipe. Exemplo:
+
+- Nomes de classes devem começar com letra maiúscula.
+- Variáveis e métodos devem utilizar o padrão camelCase.
+  
+Organização por Camadas:
+- Controller = API Rest / HTML
+- Entity = Dados
+- Repository = con bd
+- Service = Lógica
+- Config = Centraliza as configurações das aplicações
+  
+**Reutilização de Frameworks:** Utilize frameworks consolidados ao invés de reinventar a roda. Isso economiza tempo e garante robustez.
+
+**Orientação a Objetos:** Essencial para modularizar o sistema, permitindo que diferentes partes sejam desenvolvidas e mantidas por diferentes pessoas de forma eficiente.
+
 
 ### Ocultamento de Informação
 Consiste em proteger os atributos internos de uma classe, permitindo o acesso e a modificação apenas por meio de métodos públicos:
@@ -13,6 +29,10 @@ Essa prática evita manipulação direta das variáveis, preservando a integrida
 
 ### Código Coeso
 Um código é considerado coeso quando realiza uma única tarefa de forma clara e eficiente. Quanto maior a coesão, mais simples se torna entender, manter e evoluir a classe.
+
+
+### Abstração
+Abstração é o processo de representar elementos do mundo real dentro do software, focando apenas nos detalhes essenciais para o funcionamento do sistema.
 
 ### Acoplamento
 Acoplamento é o grau de dependência entre duas classes:
@@ -28,42 +48,47 @@ Implementação: seta vazada e pontilhada (uso em implementação de interfaces)
 
 Associação: seta preenchida (indica ligação direta entre objetos).
 
+### Dívida Técnica
+
+Dívida técnica ocorre quando uma solução é implementada de maneira rápida ou incorreta, funcionando momentaneamente, mas dificultando manutenções futuras. Exemplo:
+
+Código com baixo padrão de coesão e alto acoplamento.
+Soluções que “funcionam”, mas não seguem boas práticas.
+
 ### Autoacoplamento
 Ocorre quando alterações em uma parte do código impactam outras internamente. Embora natural em sistemas complexos, deve ser minimizado por meio de boas práticas.
 
 ### @Autowired
 Anotação do Spring Framework utilizada para realizar injeção de dependência. O framework instancia e fornece automaticamente os objetos necessários para uma classe, eliminando a necessidade de criação manual.
 
-### Princípios de Projeto de Código
-São boas práticas que orientam o desenvolvimento de software:
+---------------------------------------------------------------
 
-Componente	Função
-Controller	API REST / HTML
-Entity	Representa dados
-Repository	Comunicação com banco de dados
-Service	Contém a lógica de negócio
-Config	Centraliza configurações da aplicação
-SOLID
-
+### SOLID
 Conjunto de cinco princípios para garantir código orientado a objetos limpo, flexível e de fácil manutenção. Criado por Robert C. Martin:
 
-S – Single Responsibility Principle (SRP):
+### **S** – Single Responsibility Principle (SRP):
 Uma classe deve ter apenas um motivo para mudar, ou seja, uma única responsabilidade.
 
-I – Interface Segregation Principle (ISP):
-Nenhuma classe deve ser forçada a implementar métodos que não utiliza. Prefira interfaces específicas ao invés de genéricas.
+### Arquitetura MVC (Model-View-Controller)
 
-MVC (Model-View-Controller)
+A arquitetura MVC é um padrão de projeto amplamente utilizado para organizar aplicações web e desktop, promovendo a separação de responsabilidades:
 
-Padrão arquitetural que separa a aplicação em três camadas:
+- **Model:** Representa os dados da aplicação e as regras de negócio. É importante destacar que o Model não é a mesma coisa que a entidade (embora em muitos frameworks estejam relacionados).
 
-Model: Dados e regras de negócio.
+- **View:** Responsável pela interface com o usuário (geralmente arquivos HTML, CSS, JS).
 
-View: Interface com o usuário (ex.: HTML).
+- **Controller:** Atua como intermediário entre a View e o Model. Recebe as requisições da interface, processa as informações (possivelmente consultando ou manipulando o Model) e retorna uma resposta para a View.
 
-Controller: Intermedia a comunicação entre Model e View, controlando a lógica da aplicação.
+
+### **I** — Interface Segregation Principle (Princípio da Segregação de Interfaces)
+
+O Princípio da Segregação de Interfaces estabelece que uma classe não deve ser obrigada a implementar métodos que não utiliza. Em outras palavras, é melhor criar interfaces menores e especializadas, em vez de agrupar tudo em uma única interface ampla e genérica.
+
+Esse princípio favorece um baixo nível de acoplamento entre as classes, reduzindo dependências diretas entre os módulos do sistema. Assim, a comunicação entre os componentes ocorre por meio de interfaces bem estruturadas, que funcionam como acordos claros entre as diferentes partes da aplicação.
+
+Exemplo: Interfaces no Java com Swing
+- A biblioteca Swing é usada para construir interfaces gráficas em Java, e é um ótimo exemplo de aplicação do princípio de segregação de interfaces.
 ```
-Swing - Janela em Java
 package br.univille;
 
 import javax.swing.JButton;
@@ -104,7 +129,7 @@ public class Janelinha extends JFrame {
     }
 }
 ```
-
+------------------------------------------
 ### Princípio da Inversão de Dependência
 
 Esse princípio recomenda que classes clientes dependam de abstrações (interfaces ou classes abstratas), e não de implementações concretas. Abstrações são mais adaptáveis e flexíveis, enquanto implementações concretas limitam mudanças e dificultam manutenção.
@@ -115,19 +140,30 @@ Herança de interfaces: exemplo interface I extends J, impõe obrigação de imp
 
 Recomenda-se usar composição em vez de herança para maior flexibilidade.
 
+### Prefira composição a herança
+
+Significa que é melhor construir funcionalidades combinando objetos (composição) do que depender fortemente de heranças de classes. A herança pode criar estruturas rígidas e difíceis de manter, enquanto a composição permite maior reutilização de código e flexibilidade para montar comportamentos diferentes.
+
 ### Princípio de Demeter
 
 Um método deve invocar apenas métodos de:
-Sua própria classe.
-Objetos recebidos como parâmetro.
-Objetos criados dentro do método.
-Atributos da classe.
-Princípio Aberto-Fechado
-Uma classe deve estar aberta para extensões, mas fechada para modificações.
+- Sua própria classe.
+- Objetos recebidos como parâmetro.
+- Objetos criados dentro do método.
+- Atributos da classe.
 
 ### Classe Abstrata
 
 É uma classe parcialmente implementada, servindo como base para subclasses.
+
+
+### Open/Closed Principle (Princípio Aberto/Fechado)
+Uma classe deve estar:
+
+- Fechada para modificação (evitar alterações diretas que podem gerar novos bugs).
+- Aberta para extensão (permitir novos comportamentos sem mexer no código já testado).
+- 
+-------------------------------------------
 
 ### Princípio de Liskov
 
@@ -136,35 +172,81 @@ Características arquiteturais = requisitos não funcionais
 
 Um sistema dificilmente atenderá 100% dos requisitos arquiteturais, tais como:
 
-Disponibilidade
-Confiabilidade
-Integridade
-Escalabilidade
-Segurança
-Agilidade
-Tolerância a falhas
-Elasticidade
-Recuperabilidade
-Desempenho
-Implementabilidade
-Capacidade de aprendizado
+- Disponibilidade
+- Confiabilidade
+- Integridade
+- Escalabilidade
+- Segurança
+- Agilidade
+- Tolerância a falhas
+- Elasticidade
+- Recuperabilidade
+- Desempenho
+- Implementabilidade
+- Capacidade de aprendizado
 
 É necessário abrir mão de alguns aspectos, escolhendo características prioritárias para a arquitetura do sistema.
 
-### Decisão arquitetural
+------------------------------
 
-Define como o sistema será organizado, ou seja, qual arquitetura será adotada para atender melhor às necessidades.
+### Expectativas de um arquiteto
 
-### O que faz um arquiteto de software?
+- Toma decisões arquiteturais: orienta a equipe, definindo o que fazer, como e por quê, preservando características como escalabilidade e desempenho.
+- Analisa continuamente a arquitetura: pode reconstruir partes do sistema para manter a vitalidade da arquitetura.
+- Mantém-se atualizado: acompanha as últimas tendências técnicas do setor.
+- Assegura conformidade: verifica se a equipe segue as decisões arquiteturais e princípios de design.
+- Possui experiência diversificada: exposto a tecnologias variadas.
+- Conhece o domínio do negócio: para comunicação eficaz com Product Owner (PO).
+- Habilidades interpessoais: motiva, inspira e lidera pessoas.
+- Lida com questões políticas: compreende hierarquias e negocia prazos.
 
-Toma decisões arquiteturais: orienta a equipe, definindo o que fazer, como e por quê, preservando características como escalabilidade e desempenho.
-Analisa continuamente a arquitetura: pode reconstruir partes do sistema para manter a vitalidade da arquitetura.
-Mantém-se atualizado: acompanha as últimas tendências técnicas do setor.
-Assegura conformidade: verifica se a equipe segue as decisões arquiteturais e princípios de design.
-Possui experiência diversificada: exposto a tecnologias variadas.
-Conhece o domínio do negócio: para comunicação eficaz com Product Owner (PO).
-Habilidades interpessoais: motiva, inspira e lidera pessoas.
-Lida com questões políticas: compreende hierarquias e negocia prazos.
+### Decisões de arquitetura
+
+- Define como o sistema será organizado, ou seja, qual arquitetura será adotada para atender melhor às necessidades. Também garante que as decisões preservem a escalabilidade, desempenho e alinhamento com os objetivos do negócio.
+- Analisar continuamente a arquitetura
+- Analisa constantemente a arquitetura, podendo reconstruir partes do sistema para manter sua vitalidade, adaptando-se a novas necessidades e corrigindo possíveis dívidas técnicas.
+
+### Manter-se atualizado
+
+- Está sempre acompanhando as últimas tendências técnicas do setor, novas ferramentas, padrões arquiteturais e boas práticas que possam ser aplicadas ao sistema.
+
+### Domínio do negócio
+- Conhece o domínio do negócio para se comunicar de forma eficaz com o Product Owner (PO), entender prioridades e garantir que a arquitetura atenda às necessidades reais da empresa.
+
+### DevOps
+
+DevOps é uma abordagem que integra as equipes de Desenvolvimento (Dev) e Operações (Ops) para melhorar a colaboração e a produtividade. Em vez de trabalhar em silos, as equipes compartilham práticas e ferramentas para planejar, desenvolver, testar, implantar e monitorar aplicativos de forma contínua e eficiente.
+
+Por que utilizar DevOps
+- Redução do tempo de ciclo: Ao trabalhar em lotes menores e automatizar processos, é possível entregar software mais rapidamente.
+- Melhoria contínua: Com feedback constante, as equipes podem aprender e melhorar seus processos.
+- Maior colaboração: A integração entre desenvolvimento e operações promove uma comunicação mais eficaz.
+- Maior estabilidade: A automação e o monitoramento constante ajudam a identificar e corrigir problemas rapidamente.
+
+---------------------------------------
+
+### Diferença entre: Arquitetura e Design
+
+**Arquiteto:** 
+
+- Traduz requisitos de negócio em atributos arquiteturais.
+- Escolhe padrões, estilos e tecnologias.
+- Cria componentes estruturais.
+- Avalia trade-offs técnicos e comerciais.
+- Atua como mentor técnico.
+
+**Designer/Desenvolvedor:**
+- Implementa componentes definidos.
+- Cria diagramas, interfaces e código.
+- Testa e valida o software.
+
+**Tipo de Conhecimento** 
+Arquiteto:	
+- Amplitude técnica: conhece várias tecnologias, mesmo que não profundamente.
+Desenvolvedor
+- Profundidade técnica: especialista em poucas tecnologias.
+  
+-------------------------------------------
 
 ### Design Patterns
 
@@ -222,7 +304,6 @@ void h() {
   ...
 }
 ```
-Agora, se o canal mudar para UDP, apenas o método create da ChannelFactory precisa ser alterado.
 
 ### Fábrica Abstrata
 Uma variação utiliza uma classe abstrata para definir vários métodos fábrica:
@@ -279,63 +360,79 @@ public class Logger {
     }
 }
 ```
-Uso
-Logger log = Logger.getInstance();
-log.println("Executando f");
 
-### Operação DevOps
+### Observer
 
-DevOps visa entregar valor ao cliente de forma rápida e ágil, integrando desenvolvimento e operações. Todos são responsáveis pelo sistema, colaborando na criação e manutenção. Notificações de falhas são compartilhadas e resolvidas em equipe. Profissionais DevOps são raros, levando à criação de equipes especializadas.
+O Observer define uma relação de dependência um-para-muitos entre objetos.
 
-Nível de Abstração
-Papel	Foco Principal
-Arquiteto	Alto nível: estrutura do sistema, tecnologias, decisões arquiteturais, requisitos não funcionais.
-Designer/Desenvolvedor	Implementação prática: criação de código, design de classes, interfaces, testes e entrega.
-Responsabilidades
+Quando um objeto muda de estado, todos os dependentes são notificados automaticamente.
 
-Arquiteto:
 
-Traduz requisitos de negócio em atributos arquiteturais.
-Escolhe padrões, estilos e tecnologias.
-Cria componentes estruturais.
-Avalia trade-offs técnicos e comerciais.
-Atua como mentor técnico.
+Exemplo prático: sistemas de eventos e notificações.
 
-Designer/Desenvolvedor:
-Implementa componentes definidos.
-Cria diagramas, interfaces e código.
-Testa e valida o software.
+Estrutura
+Subject → objeto observado.
+Observer → interessados que “escutam” mudanças no subject.
+Exemplo em Java
+```
+// Interface Observer
+public interface Observer {
+    void update(String message);
+}
 
-Tipo de Conhecimento
-Papel	Prioridade de Conhecimento
-Arquiteto	Amplitude técnica: conhece várias tecnologias, mesmo que não profundamente.
-Desenvolvedor	Profundidade técnica: especialista em poucas tecnologias.
-Forma de Pensar
+// Subject
+import java.util.ArrayList;
+import java.util.List;
 
-Arquiteto: visão ampla do sistema, conecta requisitos de negócio às decisões técnicas, equilibrando tecnologia, negócio e restrições.
-Desenvolvedor: foco na implementação prática e detalhada das decisões arquiteturais.
+public class Publisher {
+    private List<Observer> observers = new ArrayList<>();
+
+    public void addObserver(Observer o) {
+        observers.add(o);
+    }
+
+    public void notifyObservers(String message) {
+        for (Observer o : observers) {
+            o.update(message);
+        }
+    }
+}
+
+// Concrete Observer
+public class Subscriber implements Observer {
+    private String name;
+
+    public Subscriber(String name) {
+        this.name = name;
+    }
+
+    public void update(String message) {
+        System.out.println(name + " recebeu: " + message);
+    }
+}
+
+// Uso
+public class Main {
+    public static void main(String[] args) {
+        Publisher publisher = new Publisher();
+
+        Subscriber s1 = new Subscriber("Alice");
+        Subscriber s2 = new Subscriber("Bob");
+
+        publisher.addObserver(s1);
+        publisher.addObserver(s2);
+
+        publisher.notifyObservers("Novo artigo publicado!");
+    }
+}
+```
+
 
 ### Trade-offs em Arquitetura
 
-Nenhuma arquitetura atende perfeitamente todos os requisitos. Trade-offs são escolhas que priorizam certos aspectos em detrimento de outros.
+Nenhuma arquitetura atende perfeitamente a todos os requisitos. Trade-offs são escolhas que priorizam certos aspectos em detrimento de outros. Por exemplo, a arquitetura ideal para um sistema de leilão não serve para um marketplace com milhões de requisições por segundo.
 
-Exemplo: arquitetura ideal para sistema de leilão não serve para marketplace com milhões de requisições por segundo.
+Entre as arquiteturas para alta escala, destacam-se os modelos baseados em tópicos (Publish/Subscribe) e em filas. Na arquitetura baseada em tópicos, que segue o modelo 1 para muitos, uma mensagem é publicada e todos os assinantes a recebem. Esse modelo promove baixo acoplamento entre emissor e receptor, sendo similar ao padrão Observer, com notificações assíncronas. Já na arquitetura baseada em filas, que segue o modelo 1 para 1, as mensagens são enfileiradas e consumidas em ordem, garantindo entrega ordenada e armazenamento até o consumo. Essa abordagem costuma ser mais resiliente e oferece melhor observabilidade que tópicos.
 
-Arquiteturas para alta escala
-
-1. Arquitetura baseada em tópicos (Publish/Subscribe):
-Modelo 1 para muitos: uma mensagem é publicada e todos os assinantes a recebem.
-Baixo acoplamento entre emissor e receptor.
-Similar ao padrão Observer, com notificações assíncronas.
-
-2. Arquitetura baseada em filas:
-
-Modelo 1 para 1: mensagens são enfileiradas e consumidas em ordem.
-Garante entrega ordenada e armazenamento até o consumo.
-Mais resiliente e com melhor observabilidade que tópicos.
-
-Extensibilidade arquitetural
-
-Filas garantem entrega e mantém histórico, porém exigem mudanças para novos consumidores.
-Tópicos permitem adicionar consumidores sem alteração no emissor.
+Em termos de extensibilidade arquitetural, filas garantem a entrega da mensagem e mantêm histórico, mas exigem mudanças para acomodar novos consumidores. Por outro lado, tópicos permitem adicionar consumidores sem a necessidade de alterações no emissor.
 
