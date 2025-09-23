@@ -258,6 +258,19 @@ Criacionais: focam na criação de objetos. Ex.: Abstract Factory, Factory Metho
 Estruturais: tratam da composição de classes e objetos. Ex.: Proxy, Adapter, Facade, Decorator, Bridge, Composite, Flyweight.
 Comportamentais: lidam com interação e divisão de responsabilidades. Ex.: Strategy, Observer, Template Method, Visitor, Chain of Responsibility, Command, Interpreter, Iterator, Mediator, Memento, State.
 
+### Categorias de Padrões
+
+- Criacionais: soluções para criação de objetos.
+Exemplos: Abstract Factory, Factory Method, Singleton, Builder, Prototype.
+
+- Estruturais: soluções para composição de classes e objetos.
+Exemplos: Proxy, Adapter, Facade, Decorator, Bridge, Composite, Flyweight.
+
+- Comportamentais: soluções para interação e divisão de responsabilidades.
+Exemplos: Strategy, Observer, Template Method, Visitor, Chain of Responsibility,
+Command, Interpreter, Iterator, Mediator, Memento, State.
+
+
 ### Factory Method
 Suponha um sistema distribuído baseado em TCP/IP. Três funções (f, g, h) criam objetos TCPChannel para comunicação:
 ```
@@ -435,4 +448,5 @@ Nenhuma arquitetura atende perfeitamente a todos os requisitos. Trade-offs são 
 Entre as arquiteturas para alta escala, destacam-se os modelos baseados em tópicos (Publish/Subscribe) e em filas. Na arquitetura baseada em tópicos, que segue o modelo 1 para muitos, uma mensagem é publicada e todos os assinantes a recebem. Esse modelo promove baixo acoplamento entre emissor e receptor, sendo similar ao padrão Observer, com notificações assíncronas. Já na arquitetura baseada em filas, que segue o modelo 1 para 1, as mensagens são enfileiradas e consumidas em ordem, garantindo entrega ordenada e armazenamento até o consumo. Essa abordagem costuma ser mais resiliente e oferece melhor observabilidade que tópicos.
 
 Em termos de extensibilidade arquitetural, filas garantem a entrega da mensagem e mantêm histórico, mas exigem mudanças para acomodar novos consumidores. Por outro lado, tópicos permitem adicionar consumidores sem a necessidade de alterações no emissor.
+
 
