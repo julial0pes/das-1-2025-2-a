@@ -2,7 +2,7 @@
 
 ### Princípios Fundamentais de Projeto de Software
 
-**Padronização:** Adotar um padrão de escrita de código para controlar a complexidade e facilitar o entendimento por toda a equipe. Exemplo:
+**Padronização de código:** Adotar um padrão de escrita de código para controlar a complexidade e facilitar o entendimento por toda a equipe. Exemplo:
 
 - Nomes de classes devem começar com letra maiúscula.
 - Variáveis e métodos devem utilizar o padrão camelCase.
@@ -448,5 +448,6 @@ Nenhuma arquitetura atende perfeitamente a todos os requisitos. Trade-offs são 
 Entre as arquiteturas para alta escala, destacam-se os modelos baseados em tópicos (Publish/Subscribe) e em filas. Na arquitetura baseada em tópicos, que segue o modelo 1 para muitos, uma mensagem é publicada e todos os assinantes a recebem. Esse modelo promove baixo acoplamento entre emissor e receptor, sendo similar ao padrão Observer, com notificações assíncronas. Já na arquitetura baseada em filas, que segue o modelo 1 para 1, as mensagens são enfileiradas e consumidas em ordem, garantindo entrega ordenada e armazenamento até o consumo. Essa abordagem costuma ser mais resiliente e oferece melhor observabilidade que tópicos.
 
 Em termos de extensibilidade arquitetural, filas garantem a entrega da mensagem e mantêm histórico, mas exigem mudanças para acomodar novos consumidores. Por outro lado, tópicos permitem adicionar consumidores sem a necessidade de alterações no emissor.
+
 
 
