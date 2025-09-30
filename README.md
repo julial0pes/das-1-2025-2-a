@@ -450,4 +450,37 @@ Entre as arquiteturas para alta escala, destacam-se os modelos baseados em tópi
 Em termos de extensibilidade arquitetural, filas garantem a entrega da mensagem e mantêm histórico, mas exigem mudanças para acomodar novos consumidores. Por outro lado, tópicos permitem adicionar consumidores sem a necessidade de alterações no emissor.
 
 
+-----------------------------------
+# SEGUNDO SEMESTRE
+
+**O que é Circuit Breaker?**
+É um padrão usado em sistemas distribuídos para evitar que uma aplicação (Sistema A) fique tentando chamar infinitamente outra aplicação ou serviço remoto (Sistema B) que está indisponível, sobrecarregado ou com problema.
+
+**Por que usar?**
+Quando o Sistema A chama o Sistema B, podem acontecer problemas:
+- O Sistema B está indisponível (fora do ar).
+- O Sistema B está lento ou sobrecarregado.
+- A rede está com falhas.
+- A chamada fica pendurada tentando se conectar infinitamente.
+- Se A continuar tentando chamar B sem controle, isso pode agravar os problemas, causando mais lentidão e falhas.
+
+**Como funciona o Circuit Breaker?**
+O Circuit Breaker protege a chamada ao Sistema B, monitorando as falhas e controlando quando deve parar de tentar chamar.
+
+**Ele possui 3 estados principais:**
+**Fechado (Closed)**
+-Estado normal.
+-As chamadas ao Sistema B são feitas normalmente.
+-Se as chamadas funcionam, continua assim.
+-Se muitas falhas ocorrerem (ex: número X de erros seguidos), o Circuit Breaker abre.
+
+**Aberto (Open)**
+- O Circuit Breaker bloqueia as chamadas ao Sistema B para evitar mais erros.
+- As chamadas são imediatamente rejeitadas (ou pode retornar um fallback).
+- O Circuit Breaker espera um tempo para dar chance de o sistema remoto se recuperar.
+
+**Meio Aberto (Half-Open)**
+- Depois do tempo de espera no estado aberto, o Circuit Breaker tenta uma chamada de teste para o Sistema B.
+- Se a chamada funcionar, o Circuit Breaker fecha (volta ao estado normal).
+- Se a chamada falhar, o Circuit Breaker volta para aberto e aguarda novamente.
 
