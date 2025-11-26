@@ -453,34 +453,177 @@ Em termos de extensibilidade arquitetural, filas garantem a entrega da mensagem 
 -----------------------------------
 # SEGUNDO SEMESTRE
 
-**O que é Circuit Breaker?**
-É um padrão usado em sistemas distribuídos para evitar que uma aplicação (Sistema A) fique tentando chamar infinitamente outra aplicação ou serviço remoto (Sistema B) que está indisponível, sobrecarregado ou com problema.
+**Circuit Breaker (Disjuntor)**
 
-**Por que usar?**
-Quando o Sistema A chama o Sistema B, podem acontecer problemas:
-- O Sistema B está indisponível (fora do ar).
-- O Sistema B está lento ou sobrecarregado.
-- A rede está com falhas.
-- A chamada fica pendurada tentando se conectar infinitamente.
-- Se A continuar tentando chamar B sem controle, isso pode agravar os problemas, causando mais lentidão e falhas.
+O Circuit Breaker é um padrão que protege sistemas distribuídos contra falhas repetidas.
+Ele interrompe a comunicação com um serviço instável e só volta a liberar chamadas quando entende que ele se recuperou. Assim, evita sobrecarga, timeout e efeito cascata.
 
-**Como funciona o Circuit Breaker?**
-O Circuit Breaker protege a chamada ao Sistema B, monitorando as falhas e controlando quando deve parar de tentar chamar.
+Estados principais
+Closed → Tudo ok. As requisições fluem. Se o número de erros ultrapassar um limite, o estado muda.
+Open → As chamadas são bloqueadas imediatamente. Nenhuma tentativa é feita. O sistema retorna erro de forma rápida.
+Half-Open → Após um tempo, libera algumas requisições de teste. Se forem bem-sucedidas, volta para Closed; se falhar, volta para Open.
 
-**Ele possui 3 estados principais:**
-**Fechado (Closed)**
--Estado normal.
--As chamadas ao Sistema B são feitas normalmente.
--Se as chamadas funcionam, continua assim.
--Se muitas falhas ocorrerem (ex: número X de erros seguidos), o Circuit Breaker abre.
+Por que é útil?
+Em sistemas que dependem de múltiplos serviços, uma falha simples pode derrubar tudo.
+O Circuit Breaker evita “flood” de requisições e melhora resiliência.
 
-**Aberto (Open)**
-- O Circuit Breaker bloqueia as chamadas ao Sistema B para evitar mais erros.
-- As chamadas são imediatamente rejeitadas (ou pode retornar um fallback).
-- O Circuit Breaker espera um tempo para dar chance de o sistema remoto se recuperar.
+**Implementação de Filas: Producer / Consumer**
 
-**Meio Aberto (Half-Open)**
-- Depois do tempo de espera no estado aberto, o Circuit Breaker tenta uma chamada de teste para o Sistema B.
-- Se a chamada funcionar, o Circuit Breaker fecha (volta ao estado normal).
-- Se a chamada falhar, o Circuit Breaker volta para aberto e aguarda novamente.
+Esse padrão separa quem gera tarefas de quem processa essas tarefas.
+O producer envia mensagens para uma fila; o consumer retira cada mensagem e executa o trabalho.
 
+Elementos
+Producer → Só cria tarefas e coloca na fila.
+Fila → Armazena mensagens de forma confiável.
+Consumer → Processa as mensagens uma por vez.
+
+Vantagens
+Processamento assíncrono
+Escalabilidade: vários consumers processando em paralelo
+Resiliência: se um consumer falha, outro pode assumir
+Evita travar o sistema quando há picos de carga
+Use em: envio de emails, pagamentos, uploads, geração de relatórios.
+
+Definições das Características Arquiteturais
+
+Características arquiteturais definem qualidade e comportamento do sistema, não o que ele faz.
+Elas falam sobre desempenho, confiabilidade, manutenção, acessibilidade e segurança.
+
+**Critérios para ser uma característica arquitetural**
+
+Não descreve uma funcionalidade direta (ex.: “cadastrar usuário”).
+Afeta estrutura do sistema (ex.: necessidade de cache, distribuição, particionamento).
+Impacta sucesso do projeto (ex.: alto uptime, performance mínima).
+
+Tipos
+Operacionais: desempenho, disponibilidade, escalabilidade, recuperação.
+Estruturais: modularidade, extensibilidade, testabilidade, manutenção.
+Transversais: segurança, conformidade legal (LGPD), acessibilidade, usabilidade.
+
+Essas características devem ser discutidas e priorizadas desde o início — ignorá-las gera sistemas frágeis.
+
+**CQRS (Command Query Responsibility Segregation)**
+
+CQRS separa escrita e leitura em modelos diferentes, otimizando cada lado.
+
+Escritas (Commands)
+Representam intenções do negócio
+Alteram estado
+Podem gerar eventos
+Não retornam dados complexos
+Leituras (Queries)
+Retornam dados já formatados
+Sem regras de negócio
+Podem usar bancos otimizados para leitura
+
+Benefícios
+Escalabilidade separada
+Melhoria de performance
+Código mais claro
+
+Mais segurança (quem lê ≠ quem modifica)
+
+Cuidados
+Adiciona complexidade
+Pode gerar inconsistência eventual
+Use CQRS quando há muito volume de leitura, regras de negócio complexas ou UI com muitos relatórios/consultas.
+
+**Retry Pattern (Padrão de Retentativa)**
+
+O Retry tenta repetir operações que falham temporariamente — comum em sistemas distribuídos.
+
+Quando falhas ocorrem
+Timeout
+Falha de rede momentânea
+Serviço sobrecarregado
+Limite de requisições
+
+Estratégias
+Retry imediato
+Retry com atraso
+Exponential backoff (demora crescente)
+Exponential + Jitter (evita “tsunami” de requisições simultâneas)
+Retry inteligente evita frustração do usuário e reduz instabilidade geral.
+
+**Fundamentos dos Padrões de Arquitetura**
+
+Padrões de arquitetura descrevem como organizar componentes, responsabilidades e fluxo de dados.
+
+**Anti-padrão – Big Ball of Mud**
+
+Código sem organização, altamente acoplado, difícil de manter.
+
+Arquitetura unitária
+Tudo em um único executável. Simples, mas limitada para sistemas que crescem.
+
+Cliente/Servidor
+UI local → servidor central. Base de aplicações desktop e web antigas.
+
+**Estilo de Arquitetura em Camadas**
+
+A estrutura clássica: separação por responsabilidade.
+
+Camadas típicas
+Apresentação
+Regras de negócio
+Persistência
+Banco de dados
+Vantagens
+Fácil de aprender
+Separação de responsabilidades
+Desenvolvimento rápido
+
+Desvantagens
+Deploy monolítico
+Difícil escalar partes específicas
+Alta acoplamento
+
+**Estilo de Arquitetura Pipeline**
+Fluxo unidirecional de transformação de dados: cada etapa faz uma tarefa específica.
+
+Ideal para:
+ETL
+Processamento de arquivos
+Stream de dados
+Cada estágio é independente e reaproveitável.
+
+**Arquitetura Microkernel**
+
+Núcleo pequeno + plugins.
+
+Core
+Funcionalidades essenciais
+Plugins
+Funcionalidades extras sob demanda
+
+Uso comum:
+IDEs (VS Code, Eclipse)
+Sistemas com personalização por cliente
+
+**Arquitetura de Microsserviços**
+
+Divide sistemas em serviços menores e independentes, cada um com seu domínio.
+
+Características
+Desacoplamento alto
+Banco isolado por serviço
+APIs para comunicação
+
+Benefícios
+Escalabilidade
+Deploy independente
+Time-to-market
+
+Desafios
+Latência
+Monitoramento
+Consistência eventual
+
+Anti-Patterns Comuns
+1. Granularidade Muito Fina: Serviços minúsculos que só fazem CRUD 
+2. Transações Distribuídas: Tenta fazer ACID entre serviços
+3. Shared Database: Múltiplos serviços acessando mesmo banco
+4. ESB Disfarçado: API Gateway com lógica de negócio
+5. Acoplamento Chatty: Serviço A chama B chama C chama D...
+
+Orquestração de chamadas
