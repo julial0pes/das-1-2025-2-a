@@ -453,7 +453,7 @@ Em termos de extensibilidade arquitetural, filas garantem a entrega da mensagem 
 -----------------------------------
 # SEGUNDO SEMESTRE
 
-**Circuit Breaker (Disjuntor)**
+### Circuit Breaker (Disjuntor)
 
 O Circuit Breaker é um padrão que protege sistemas distribuídos contra falhas repetidas.
 Ele interrompe a comunicação com um serviço instável e só volta a liberar chamadas quando entende que ele se recuperou. Assim, evita sobrecarga, timeout e efeito cascata.
@@ -467,7 +467,7 @@ Por que é útil?
 Em sistemas que dependem de múltiplos serviços, uma falha simples pode derrubar tudo.
 O Circuit Breaker evita “flood” de requisições e melhora resiliência.
 
-**Implementação de Filas: Producer / Consumer**
+### Implementação de Filas: Producer / Consumer
 
 Esse padrão separa quem gera tarefas de quem processa essas tarefas.
 O producer envia mensagens para uma fila; o consumer retira cada mensagem e executa o trabalho.
@@ -489,7 +489,7 @@ Definições das Características Arquiteturais
 Características arquiteturais definem qualidade e comportamento do sistema, não o que ele faz.
 Elas falam sobre desempenho, confiabilidade, manutenção, acessibilidade e segurança.
 
-**Critérios para ser uma característica arquitetural**
+### Critérios para ser uma característica arquitetural
 
 Não descreve uma funcionalidade direta (ex.: “cadastrar usuário”).
 Afeta estrutura do sistema (ex.: necessidade de cache, distribuição, particionamento).
@@ -502,7 +502,7 @@ Transversais: segurança, conformidade legal (LGPD), acessibilidade, usabilidade
 
 Essas características devem ser discutidas e priorizadas desde o início — ignorá-las gera sistemas frágeis.
 
-**CQRS (Command Query Responsibility Segregation)**
+### CQRS (Command Query Responsibility Segregation)
 
 CQRS separa escrita e leitura em modelos diferentes, otimizando cada lado.
 
@@ -528,7 +528,7 @@ Adiciona complexidade
 Pode gerar inconsistência eventual
 Use CQRS quando há muito volume de leitura, regras de negócio complexas ou UI com muitos relatórios/consultas.
 
-**Retry Pattern (Padrão de Retentativa)**
+### Retry Pattern (Padrão de Retentativa)
 
 O Retry tenta repetir operações que falham temporariamente — comum em sistemas distribuídos.
 
@@ -545,11 +545,11 @@ Exponential backoff (demora crescente)
 Exponential + Jitter (evita “tsunami” de requisições simultâneas)
 Retry inteligente evita frustração do usuário e reduz instabilidade geral.
 
-**Fundamentos dos Padrões de Arquitetura**
+### Fundamentos dos Padrões de Arquitetura
 
 Padrões de arquitetura descrevem como organizar componentes, responsabilidades e fluxo de dados.
 
-**Anti-padrão – Big Ball of Mud**
+### Anti-padrão – Big Ball of Mud
 
 Código sem organização, altamente acoplado, difícil de manter.
 
@@ -559,7 +559,7 @@ Tudo em um único executável. Simples, mas limitada para sistemas que crescem.
 Cliente/Servidor
 UI local → servidor central. Base de aplicações desktop e web antigas.
 
-**Estilo de Arquitetura em Camadas**
+### Estilo de Arquitetura em Camadas
 
 A estrutura clássica: separação por responsabilidade.
 
@@ -578,7 +578,7 @@ Deploy monolítico
 Difícil escalar partes específicas
 Alta acoplamento
 
-**Estilo de Arquitetura Pipeline**
+### Estilo de Arquitetura Pipeline
 Fluxo unidirecional de transformação de dados: cada etapa faz uma tarefa específica.
 
 Ideal para:
@@ -587,7 +587,7 @@ Processamento de arquivos
 Stream de dados
 Cada estágio é independente e reaproveitável.
 
-**Arquitetura Microkernel**
+### Arquitetura Microkernel
 
 Núcleo pequeno + plugins.
 
@@ -600,7 +600,7 @@ Uso comum:
 IDEs (VS Code, Eclipse)
 Sistemas com personalização por cliente
 
-**Arquitetura de Microsserviços**
+### Arquitetura de Microsserviços
 
 Divide sistemas em serviços menores e independentes, cada um com seu domínio.
 
@@ -626,4 +626,3 @@ Anti-Patterns Comuns
 4. ESB Disfarçado: API Gateway com lógica de negócio
 5. Acoplamento Chatty: Serviço A chama B chama C chama D...
 
-Orquestração de chamadas
