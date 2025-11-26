@@ -600,7 +600,7 @@ Uso comum:
 IDEs (VS Code, Eclipse)
 Sistemas com personalização por cliente
 
-### Arquitetura de Microsserviços
+###Arquitetura de Microsserviços
 
 Divide sistemas em serviços menores e independentes, cada um com seu domínio.
 
@@ -625,4 +625,5 @@ Anti-Patterns Comuns
 3. Shared Database: Múltiplos serviços acessando mesmo banco
 4. ESB Disfarçado: API Gateway com lógica de negócio
 5. Acoplamento Chatty: Serviço A chama B chama C chama D...
+
 
